@@ -1,0 +1,44 @@
+function find_sym(set_1,set_2) {
+  let set_3 = set_1;
+  for(let i = 0;i<set_1.length;i++){
+    let flag = 0;
+    for(let j = 0;j<set_2.length;j++){
+      if(set_3[i]===set_2[j]){
+        flag = 1;
+        delete set_2[j];
+      }
+    }
+    if(flag){
+  delete set_3[i];
+    }
+  }
+for(let k = 0;k<set_2.length;k++){
+    if(set_2[k]!==undefined){
+      set_3.push(set_2[k]);
+    }
+  }
+return set_3.sort();
+}
+function sym(...args){
+  let final = args[0];
+  for(let i = 1;i<args.length;i++){
+    final = find_sym(final,args[i])
+  }
+  for(let i =0;i<final.length;i++){
+    for(let j =i+1;j<final.length;j++){
+      if(final[i]===final[j]){
+        delete final[j];
+        break;
+      }
+    }
+  }
+  let new_final = new Array();
+  for(let j = 0;j<final.length;j++){
+      if(final[j]!==undefined){
+        new_final.push(final[j])
+      }
+  }
+  return new_final;
+}
+
+console.log(sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]));
